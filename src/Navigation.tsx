@@ -1,5 +1,4 @@
 import React from 'react';
-import { SafeAreaView, View, Text, StatusBar } from 'react-native';
 
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
