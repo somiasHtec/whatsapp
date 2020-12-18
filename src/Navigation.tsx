@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 // Screens
+import Login from '~/screens/login';
 import Chats from '~/screens/chats';
 import Status from '~/screens/status';
 import Calls from '~/screens/calls';
@@ -16,6 +17,8 @@ import Conversation from '~/screens/conversation';
 // Components
 import HeaderLeft from '~/components/mainHeader/HeaderLeft';
 import HeaderRight from '~/components/mainHeader/HeaderRight';
+
+import { useUserContext } from '~/context/UserContext';
 
 const Stack = createStackNavigator();
 const Tabs = createMaterialTopTabNavigator();
@@ -37,29 +40,39 @@ const TabNavigation = () => (
 );
 
 const Navigation = () => {
+  const { loggedIn } = useUserContext();
+
   return (
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen
-            name="TabNavigation"
-            component={TabNavigation}
-            options={{
-              title: '',
-              headerLeft: () => <HeaderLeft />,
-              headerRight: () => <HeaderRight />,
-              headerStyle: {
-                backgroundColor: COLORS.tealGreenDark,
-                shadowOpacity: 0,
-                elevation: 0,
-              },
-            }}
-          />
-          <Stack.Screen
-            name="Conversation"
-            component={Conversation}
-            // options={{ headerShown: false }}
-          />
+          {loggedIn ? (
+            <>
+              <Stack.Screen
+                name="TabNavigation"
+                component={TabNavigation}
+                options={{
+                  title: '',
+                  headerLeft: () => <HeaderLeft />,
+                  headerRight: () => <HeaderRight />,
+                  headerStyle: {
+                    backgroundColor: COLORS.tealGreenDark,
+                    shadowOpacity: 0,
+                    elevation: 0,
+                  },
+                }}
+              />
+              <Stack.Screen
+                name="Conversation"
+                component={Conversation}
+                // options={{ headerShown: false }}
+              />
+            </>
+          ) : (
+            <>
+              <Stack.Screen name="Login" component={Login} />
+            </>
+          )}
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
