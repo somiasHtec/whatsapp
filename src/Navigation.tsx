@@ -11,6 +11,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Chats from '~/screens/chats';
 import Status from '~/screens/status';
 import Calls from '~/screens/calls';
+import Conversation from '~/screens/conversation';
 
 // Components
 import HeaderLeft from '~/components/mainHeader/HeaderLeft';
@@ -53,6 +54,11 @@ const Navigation = () => {
                 elevation: 0,
               },
             }}
+          />
+          <Stack.Screen
+            name="Conversation"
+            component={Conversation}
+            // options={{ headerShown: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -1,13 +1,19 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import { ICONS } from '~/assets';
 
 import styles from './styles';
 
+import { useNavigation } from '@react-navigation/native';
+
 const Interface = () => {
+  const { navigate } = useNavigation();
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigate('Conversation')}
+    >
       <Image source={ICONS.profile} style={styles.imageStyle} />
       <View style={styles.infoWrapper}>
         <View style={styles.userInfo}>
@@ -18,7 +24,7 @@ const Interface = () => {
           <Text>I put a screnshot in the issue</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

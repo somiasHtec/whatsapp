@@ -3,10 +3,6 @@ import { StyleSheet } from 'react-native';
 import { COLORS } from '~/assets';
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
   addPerson: {
     width: 70,
     height: 70,
