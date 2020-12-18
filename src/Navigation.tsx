@@ -40,13 +40,13 @@ const TabNavigation = () => (
 );
 
 const Navigation = () => {
-  const { loggedIn } = useUserContext();
+  const { loggedIn, idToken } = useUserContext();
 
   return (
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator>
-          {loggedIn ? (
+          {loggedIn && idToken ? (
             <>
               <Stack.Screen
                 name="TabNavigation"
@@ -62,15 +62,15 @@ const Navigation = () => {
                   },
                 }}
               />
-              <Stack.Screen
-                name="Conversation"
-                component={Conversation}
-                // options={{ headerShown: false }}
-              />
+              <Stack.Screen name="Conversation" component={Conversation} />
             </>
           ) : (
             <>
-              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{ headerShown: false }}
+              />
             </>
           )}
         </Stack.Navigator>

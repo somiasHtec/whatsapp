@@ -19,9 +19,15 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
 
+import { GoogleSignin } from '@react-native-community/google-signin';
+
+import { useUserContext } from '~/context/UserContext';
+
 const Interface = () => {
   const [todo, setTodo] = useState('');
   const ref = firestore().collection('dragance');
+
+  const { name, lastName } = useUserContext();
 
   const [todos, setTodos] = useState([]);
   // ...
@@ -54,6 +60,16 @@ const Interface = () => {
 
   console.log(todo);
 
+  const signOut = async () => {
+    try {
+      await GoogleSignin.revokeAccess();
+      await GoogleSignin.signOut();
+      // this.setState({ user: null }); // Remember to remove the user from your app's state as well
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       {/* <TextInput
@@ -64,8 +80,13 @@ const Interface = () => {
       /> */}
       {/* <Button title="Submit" onPress={() => addTodo()} /> */}
 
+      <Text>name: {name}</Text>
+      <Text>lastName: {lastName}</Text>
+
       <ChatItem />
       <FloatingButton />
+
+      <Button title="Sign out" onPress={signOut} disabled={true} />
     </View>
   );
 };
