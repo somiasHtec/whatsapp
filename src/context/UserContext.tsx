@@ -1,20 +1,36 @@
 import React, { createContext, useState, useContext } from 'react';
 
-type ContextType = {
-  value: string | null;
+type UserInfo = {
+  idToken: string;
+  name: string;
+  lastName: string;
+  userPhoto: string;
+  email: string;
+  userId: string;
+};
+
+const initialState = {
+  idToken: '',
+  name: '',
+  lastName: '',
+  userPhoto: '',
+  email: '',
+  userId: '',
 };
 
 export const UserContext = createContext({
   loggedIn: false,
   setLoggedIn: (type: boolean) => {},
-  idToken: '',
-  setIdToken: (id: any) => {},
-  name: '',
-  setName: (name: any) => {},
-  lastName: '',
-  setLastName: (lastName: any) => {},
-  userPhoto: '',
-  setUserPhoto: (photoUrl: any) => {},
+
+  userInfo: {
+    idToken: '',
+    name: '',
+    lastName: '',
+    userPhoto: '',
+    email: '',
+    userId: '',
+  },
+  setUserInfo: (value: UserInfo) => {},
 });
 
 type Props = {
@@ -27,6 +43,10 @@ export const UserContextProvider = ({ children }: Props) => {
   const [name, setName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
   const [userPhoto, setUserPhoto] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [userId, setUserId] = useState<string>('');
+
+  const [userInfo, setUserInfo] = useState<UserInfo>(initialState);
 
   const value = {
     loggedIn,
@@ -39,35 +59,32 @@ export const UserContextProvider = ({ children }: Props) => {
     setLastName,
     userPhoto,
     setUserPhoto,
+    email,
+    setEmail,
+    userId,
+    setUserId,
+    userInfo,
+    setUserInfo,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
 export const useUserContext = () => {
-  const {
-    loggedIn,
-    setLoggedIn,
-    idToken,
-    setIdToken,
-    name,
-    setName,
-    lastName,
-    setLastName,
-    userPhoto,
-    setUserPhoto,
-  } = useContext(UserContext);
+  const { loggedIn, setLoggedIn, userInfo, setUserInfo } = useContext(
+    UserContext
+  );
+
+  const emptyOutUserContext = () => {
+    setLoggedIn(false);
+    setUserInfo(initialState);
+  };
 
   return {
     loggedIn,
     setLoggedIn,
-    idToken,
-    setIdToken,
-    name,
-    setName,
-    lastName,
-    setLastName,
-    userPhoto,
-    setUserPhoto,
+    userInfo,
+    setUserInfo,
+    emptyOutUserContext,
   };
 };

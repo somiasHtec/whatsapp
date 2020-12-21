@@ -10,8 +10,6 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 // Screens
 import Login from '~/screens/login';
 import Chats from '~/screens/chats';
-import Status from '~/screens/status';
-import Calls from '~/screens/calls';
 import Conversation from '~/screens/conversation';
 
 // Components
@@ -34,13 +32,14 @@ const TabNavigation = () => (
     }}
   >
     <Tabs.Screen name="Chats" component={Chats} />
-    <Tabs.Screen name="Status" component={Status} />
-    <Tabs.Screen name="Calls" component={Calls} />
   </Tabs.Navigator>
 );
 
 const Navigation = () => {
-  const { loggedIn, idToken } = useUserContext();
+  const {
+    loggedIn,
+    userInfo: { idToken },
+  } = useUserContext();
 
   return (
     <SafeAreaProvider>

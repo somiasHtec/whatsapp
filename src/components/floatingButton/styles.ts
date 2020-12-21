@@ -14,9 +14,8 @@ export default StyleSheet.create({
     right: 25,
     bottom: 40,
   },
-  plusSign: {
-    color: COLORS.white,
-    fontSize: 30,
-    fontWeight: '800',
+  startConversation: {
+    width: 25,
+    height: 25,
   },
 });

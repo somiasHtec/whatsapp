@@ -4,4 +4,5 @@ export default {
   settings: require('./settings.png'),
   send: require('./send.png'),
   chatBackground: require('./chatBackground.png'),
+  startConversation: require('./chat.png'),
 };

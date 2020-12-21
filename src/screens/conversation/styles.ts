@@ -48,11 +48,21 @@ export default StyleSheet.create({
     padding: 5,
     alignSelf: 'flex-end',
   },
+  friendMessageContainer: {
+    padding: 5,
+    alignSelf: 'flex-start',
+  },
   messageBox: {
     backgroundColor: COLORS.messageGreen,
     marginLeft: 50,
     borderRadius: 5,
     padding: 10,
+  },
+  friendMessageBox: {
+    marginRight: 50,
+    borderRadius: 5,
+    padding: 10,
+    backgroundColor: COLORS.white,
   },
   messageStyle: {
     fontSize: 16,
